@@ -1,37 +1,32 @@
-
-import React, {useEffect, useState} from "react";
-import axios from "axios";
+import React from "react";
 import "./style.css";
 
-function DataFetch() {
-    const [post, setPost] = useState({})
-    const [id,setId] = useState(1)
+class DataFetch extends React.Component{
+    state = {
+        posts: [],
+    }
 
-    useEffect(() => {
-        axios
-            .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
-            .then(res => {
-                console.log(res)
-                setPost(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [id])
+    componentDidMount() {
+        fetch('https://jsonplaceholder.typicode.com/posts')
+        .then((response) => response.json())
+        .then(postsList => {
+            this.setState({ posts: postsList });
+        });
+    }
 
-    return (
-        <div className="field">
-            <label htmlFor="userId">Write down the userId for necessary title and body: </label>
-            <input type="text" value={id} onChange={changer => setId(changer.target.value)}  />
-            <div>
-                <p>{post.title}</p>
-                <p>{post.body}</p> </div>
-            
-        </div>
-    )
+    render() {
+        return (
+            <ul>
+                {this.state.posts.map((post) => (
+                    <li key={post.id}>
+                        <p>user id:{post.id}</p>
+                        <p>title: {post.title}</p>
+                        <p>body: {post.body}</p>
+                        </li>
+                ))}
+            </ul>
+        )
+    }
 }
 
-
-
 export default DataFetch;
-
