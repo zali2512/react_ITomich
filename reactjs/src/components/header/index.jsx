@@ -4,6 +4,7 @@ import './style.css';
 import ReadOnly from "./EditData/ReadOnlyRow";
 import EditableRow from "./EditData/EditableRow";
 import AddData from "./EditData/AddData";
+import { useNavigate } from "react-router-dom";
 
 const DataFetch = () => {
   const[posts, setPosts] = useState([])
@@ -19,6 +20,12 @@ const DataFetch = () => {
         title:"",
         body: ""  
     })
+
+    const navigate = useNavigate()
+
+    const handleClick = () => {
+      navigate("/")
+    }
 
     useEffect(() => {
       axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
@@ -131,6 +138,7 @@ const DataFetch = () => {
       posts={posts}
       setPosts={setPosts} 
       />
+      <button type="submit"  onClick={handleClick} >LogOut</button>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-form {
+.formBody {
 	display: flex;
 	flex-direction: column;
 	width: 400px;
@@ -10,7 +10,7 @@ form {
     transform: translate(-50%, -50%)
 }
 
-form input {
+.formBody input {
 	width: 100%;
 	padding: 16px;
 	background-color: #edf2f7;
@@ -21,7 +21,7 @@ form input {
 	box-sizing: border-box;
 }
 
-form textarea {
+.formBody textarea {
 	width: 100%;
 	padding: 16px;
 	background-color: #edf2f7;
@@ -33,19 +33,20 @@ form textarea {
 	height: 150px;
 }
 
-form button[type="submit"] {
+button[type="submit"] {
 	background-color: #845fda;
 	color: #ffffff;
 	font-size: 14px;
-	border: none;
+	border: solid 2px #01a715;
 	padding: 16px;
-	width: 100%;
+	width: 50%;
+	margin-bottom: 5px;
 }
 
-form button:active {
+button.active {
     background-color: #01a715
 }
 
-form button:focus {
+button:focus {
     background-color: #3c129e;
 }

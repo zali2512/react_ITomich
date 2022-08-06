@@ -52,7 +52,7 @@ const AddData = ({addFormData, setAddFormData, posts, setPosts}) => {
         placeholder="Enter a body..."
         onChange={handleAddFormChange}
          />
-        <button type="submit">Add</button>
+        <button type="submit" >Add</button>
       </form>)
     
 }

@@ -2,8 +2,16 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import  './style.css'
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
+
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate("/posts")
+  }
+
     const formik = useFormik({
       initialValues: {
         email: '',
@@ -20,7 +28,11 @@ const LogIn = () => {
         console.log(JSON.stringify(values, null, 2));
       },
     });
+
+    
+
     return (
+      <div className="formBody">
       <form onSubmit={formik.handleSubmit}>
 
         <label htmlFor="email">Email Address</label>
@@ -49,8 +61,9 @@ const LogIn = () => {
           <div>{formik.errors.password}</div>
         ) : null}
   
-        <button type="submit">LogIn</button>
-      </form>
+          <div className="LogInButton"><button type="submit" onClick={handleClick} onSubmit={formik.handleSubmit}>LogIn</button></div>
+        
+      </form></div>
     );
   };
 
