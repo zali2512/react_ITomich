@@ -1,10 +1,11 @@
-import React, {useEffect, useState, Fragment} from "react";
+import React, {useEffect, useState, Fragment, useContext} from "react";
 import axios from "axios"; 
 import './style.css';
 import ReadOnly from "./EditData/ReadOnlyRow";
 import EditableRow from "./EditData/EditableRow";
 import AddData from "./EditData/AddData";
 import { useNavigate } from "react-router-dom";
+import LogInContext from "../logIn/logInContext";
 
 const DataFetch = () => {
   const[posts, setPosts] = useState([])
@@ -20,6 +21,8 @@ const DataFetch = () => {
         title:"",
         body: ""  
     })
+
+  const [emailContext, setEmailContext] = useContext(LogInContext)
 
     const navigate = useNavigate()
 
@@ -85,7 +88,6 @@ const DataFetch = () => {
   const handleCancelClick = () => {
     setEditPostId(null)
   }
-
  
   const HandleDeleteClick = (postId) => {
       const newPosts = [...posts]
@@ -97,11 +99,13 @@ const DataFetch = () => {
       setPosts(newPosts)
     }
 
+    const email = emailContext
 
   return (
     <div className="field">
-      <label htmlFor="userId">Write down the userId for necessary title and body: </label>
+      <label htmlFor="userId"> {email}, Write down the userId for necessary title and body: </label>
       <p><input type="text" value={userId} onChange={e => setUserId(e.target.value) } /></p>
+      
       <div className="Container">
         <form onSubmit={handleEditFormSubmit}>
          <table>

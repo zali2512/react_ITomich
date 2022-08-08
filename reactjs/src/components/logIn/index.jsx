@@ -3,12 +3,17 @@ import { useFormik } from "formik";
 import * as Yup from 'yup';
 import  './style.css'
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import LogInContext from "./logInContext";
 
 const LogIn = () => {
 
+  const [emailContext, setEmailContext] = useContext(LogInContext);
   const navigate = useNavigate()
 
-  const handleClick = () => {
+  const handleClick = (values) => {
+    
+    setEmailContext(JSON.stringify(values.email))
     navigate("/posts")
   }
 
@@ -25,11 +30,10 @@ const LogIn = () => {
         .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
       }),
       onSubmit: values => {
+        handleClick(values);
         console.log(JSON.stringify(values, null, 2));
-      },
+    },
     });
-
-    
 
     return (
       <div className="formBody">
@@ -61,7 +65,7 @@ const LogIn = () => {
           <div>{formik.errors.password}</div>
         ) : null}
   
-          <div className="LogInButton"><button type="submit" onClick={handleClick} onSubmit={formik.handleSubmit}>LogIn</button></div>
+          <div className="LogInButton"><button type="submit" onSubmit={formik.handleSubmit}>LogIn</button></div>
         
       </form></div>
     );
